@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_forms_bootstrap',
     'hello',
-    'accounts'
+    'accounts',
+    'paypal_store',
+    'products',
+    'paypal.standard.ipn',
+    'magazines',
+
 ]
 
 MIDDLEWARE = [
@@ -133,7 +138,11 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailAuth',
 )
+#paypal setting
 
+SITE_URL = 'http://127.0.0.1:8000'
+PAYPAL_NOTIFY_URL = 'http://127.0.0.1/a-very-hard-to-guess-url/'
+PAYPAL_RECEIVER_EMAIL = 'vishaldara01-facilitator@gmail.com'
 
-STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE', 'publishable key')
-STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'secret key')
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE', 'pk_test_0fEEPoCC5O0kRHlECurnNeSV')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'sk_test_UMEdrW9Y9vvFxERd9AjYBRKJ')

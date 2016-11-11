@@ -1,3 +1,20 @@
 from django.test import TestCase
+from views import get_index
+from django.core.urlresolvers import resolve
+from django.shortcuts import render_to_response
 
-# Create your tests here.
+
+class HomePageTest(TestCase):
+    def test_home_page_resolves(self):
+        home_page = resolve('/')
+        self.assertEqual(home_page.func, get_index)
+
+    def test_home_page_status_code_is_ok(self):
+            home_page = self.client.get('/products/')
+            self.assertEquals(home_page.status_code, 200)
+
+    def test_check_content_is_correct(self):
+        products_page = self.client.get('/products/')
+        self.assertTemplateUsed(products_page, "products/products.html")
+        products_page_template_output = render_to_response("products/products.html").content
+        self.assertEquals(products_page.content, products_page_template_output)
